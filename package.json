@@ -15,8 +15,11 @@
   },
   "description": "Avatars in your Message list",
   "dependencies": {
+    "create-react-class": "^15.6.3",
     "is-retina": "^1.0.3",
     "md5": "^2.1.0",
+    "prop-types": "^15.6.1",
+    "react": "^16.4.0",
     "recompose": "^0.16.0"
   },
   "license": "MIT"
