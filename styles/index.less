@@ -48,12 +48,13 @@
   }
 
   .mail-important-icon {
-    margin-left: -15px;
+    margin-left: 0;
     padding: 0;
   }
 }
 
 
+/** Star & Important icons **/
 .thread-list, .draft-list {
   .list-item {
     line-height: unset;
@@ -63,4 +64,34 @@
     width: 25px !important;
     height: 25px;
   }
+
+  .mail-important-icon {
+    margin-left: 0 !important;
+    margin-right: 5px !important;
+  }
+}
+
+.thread-list, .draft-list {
+   .list-column-Item {
+     .mail-important-icon {
+       margin-left: 5px !important;
+       margin-right: 0 !important;
+     }
+   }
+}
+
+/** Eye icon **/
+.open-tracking-icon {
+  position: absolute;
+  top: 18px;
+  left: 22px;
+}
+
+.list-column-Item .open-tracking-icon {
+  top: 23px;
+  left: 4px;
+}
+
+.thread-injected-icons > span {
+  width: 0 !important;
 }
