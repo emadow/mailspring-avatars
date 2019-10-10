@@ -2,18 +2,21 @@
   "name": "mailspring-avatars",
   "main": "./lib/main",
   "version": "0.1.0",
+  "description": "Avatars in your Message list",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/Striffly/mailspring-avatars"
+  },
+  "scripts": {
+    "build": "tsc"
   },
   "engines": {
-    "mailspring": ">=1.0.0"
+    "mailspring": ">=1.6.3"
   },
   "windowTypes": {
     "default": true,
     "composer": true
   },
-  "description": "Avatars in your Message list",
   "dependencies": {
     "create-react-class": "^15.6.3",
     "is-retina": "^1.0.3",
@@ -21,6 +24,10 @@
     "prop-types": "^15.6.1",
     "react": "^16.4.0",
     "recompose": "^0.16.0"
+  },
+  "devDependencies": {
+    "@types/react": "^16.7.22",
+    "typescript": "^3.6.3"
   },
   "license": "MIT"
 }
