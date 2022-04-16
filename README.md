@@ -9,9 +9,9 @@ This was adapted from N1-avatars https://github.com/unity/n1-avatars. Thank you 
 
 ## Installing
 
-2. [Grab the latest release](https://github.com/Striffly/mailspring-avatars/releases)
-3. Extract Mailspring-Avatars and load Mailspring
-4. From the menu, select `Developer > Install a Package Manually...` from the dialog, choose the directory of this plugin to install it
+1. [Grab the latest release](https://github.com/Striffly/mailspring-avatars/releases)
+1. Extract Mailspring-Avatars and load Mailspring
+1. From the menu, select `Developer > Install a Package Manually...` from the dialog, choose the directory of this plugin to install it
 
 
 ## Contribute
