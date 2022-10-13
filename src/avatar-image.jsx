@@ -31,24 +31,30 @@ const AvatarImage = createReactClass({
     getGravatarURL: function(email, size, cb, tryNext )
     {
         var base = 'gravatar.com/avatar/<%=id%>?s=<%=size%>&d=404';
-
+        
         // if email does not contain @ it's already an MD5 hash
         if( email.indexOf('@') > -1 )
             email = md5(email);
 
         var prefix = this.getProtocol() === 'https:' ? 'https://secure.' : 'http://';
         size = isRetina ? size * 2 : size;
-        cb(prefix + this.parse(base, {id: email, size: size}));
+        var url = prefix + this.parse(base, { id: email, size: size });
+        this.get(url, function(data) {
+            cb(prefix + this.parse(base, { id: email, size: size }));
+        }, tryNext)
     },
 
     getClearbitURL: function(email, size, cb, tryNext)
     {
         var base = "logo.clearbit.com/<%=domain%>";
-
+        
         var domain;
         if( email.indexOf('@') > -1 ) domain = email.split('@')[1];
         var prefix = this.getProtocol() === 'https:' ? 'https://secure.' : 'http://';
-        cb(prefix + this.parse(base, {domain: domain}));
+        var url = prefix + this.parse(base, { domain: domain });
+        this.get(url, function(data) {
+            cb(url);
+        }, tryNext);
     },
 
     /**
