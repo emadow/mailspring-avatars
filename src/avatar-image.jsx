@@ -40,7 +40,8 @@ const AvatarImage = createReactClass({
         size = isRetina ? size * 2 : size;
         var url = prefix + this.parse(base, { id: email, size: size });
         this.get(url, function(data) {
-            cb(prefix + this.parse(base, { id: email, size: size }));
+            console.log(url);
+            cb(url);
         }, tryNext)
     },
 
@@ -53,6 +54,7 @@ const AvatarImage = createReactClass({
         var prefix = this.getProtocol() === 'https:' ? 'https://secure.' : 'http://';
         var url = prefix + this.parse(base, { domain: domain });
         this.get(url, function(data) {
+            console.log(url);
             cb(url);
         }, tryNext);
     },
@@ -67,7 +69,11 @@ const AvatarImage = createReactClass({
     getFacebookURL: function( id, size, cb, tryNext )
     {
         var base = 'graph.facebook.com/<%=id%>/picture?width=<%=size%>';
-        cb( this.getProtocol() + '//' + this.parse(base, {id: id, size: size}));
+        var url = this.getProtocol() + '//' + this.parse(base, {id: id, size: size});
+        this.get(url, function(data) {
+            console.log(url);
+            cb(url);
+        }, tryNext)
     },
 
     /**
@@ -83,6 +89,7 @@ const AvatarImage = createReactClass({
         var url = this.getProtocol() + '//' + this.parse(base, {id: id});
         this.get(url, function(data) {
             var src = data.entry.gphoto$thumbnail.$t.replace('s64', 's' + size); // replace with the correct size
+            console.log(url);
             cb(src);
         }, tryNext);
     },
@@ -97,7 +104,11 @@ const AvatarImage = createReactClass({
     getSkypeURL: function( id, size, cb, tryNext )
     {
         var base = 'api.skype.com/users/<%=id%>/profile/avatar';
-        cb(this.getProtocol() + '//' + this.parse(base, {id: id}));
+        var url = this.getProtocol() + '//' + this.parse(base, {id: id});
+        this.get(url, function(data) {
+            console.log(url);
+            cb(url);
+        }, tryNext)
     },
 
     /**
@@ -150,10 +161,13 @@ const AvatarImage = createReactClass({
      */
     get: function(url, successCb, errorCb) {
         var request = new XMLHttpRequest();
-        request.onreadystatechange = function() {
+        request.onreadystatechange = () => {
             if (request.readyState === 4) {
                 if (request.status === 200) {
-                    var data = JSON.parse(request.responseText);
+                    var data = request.responseText;
+                    if (this.isJsonString(data)) {
+                        data = JSON.parse(data);
+                    }
                     successCb(data);
                 } else {
                     errorCb(request.status);
@@ -162,6 +176,15 @@ const AvatarImage = createReactClass({
         };
         request.open('GET', url, true);
         request.send();
+    },
+
+    isJsonString: function(str) {
+        try {
+            JSON.parse(str);
+        } catch (e) {
+            return false;
+        }
+        return true;
     },
 
     /**
@@ -255,6 +278,18 @@ const AvatarImage = createReactClass({
             this.state.src = null;
         }
 
+        if( this.state.triedGravatar === false && ! this.state.url && this.props.email) {
+            this.state.triedGravatar = true;
+            this.getGravatarURL( this.props.email, this.props.size, this.setSrc, tryNext );
+            return;
+        }
+
+        if( this.state.triedClearbit === false && ! this.state.url && this.props.email ) {
+            this.state.triedClearbit = true;
+            this.getClearbitURL( this.props.email, this.props.size, this.setSrc, tryNext);
+            return;
+        }
+
         if( this.state.triedFacebook === false && ! this.state.url && this.props.facebookId) {
             this.state.triedFacebook = true;
             this.getFacebookURL( this.props.facebookId , this.props.size, this.setSrc, tryNext );
@@ -270,18 +305,6 @@ const AvatarImage = createReactClass({
         if( this.state.triedSkype === false && ! this.state.url && this.props.skypeId) {
             this.state.triedSkype = true;
             this.getSkypeURL( this.props.skypeId , this.props.size, this.setSrc, tryNext );
-            return;
-        }
-
-        if( this.state.triedGravatar === false && ! this.state.url && this.props.email) {
-            this.state.triedGravatar = true;
-            this.getGravatarURL( this.props.email, this.props.size, this.setSrc, tryNext );
-            return;
-        }
-
-        if( this.state.triedClearbit === false && ! this.state.url && this.props.email ) {
-            this.state.triedClearbit = true;
-            this.getClearbitURL( this.props.email, this.props.size, this.setSrc, tryNext);
             return;
         }
 
