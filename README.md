@@ -1,17 +1,18 @@
 ## Avatars for Mailspring
 
-Simple, naive implementation of Avatars in the Message List.
+Simple, naive implementation of Avatars in the Message List.<br>
+Add avatar before each email you receive, no more, no less !<br>
 No caching, might do a lot of image requests.
 
-This was adapted from N1-avatars https://github.com/unity/n1-avatars. Thank you @unity for the work!
+Fork of [emadow](https://github.com/emadow/mailspring-avatars) project, thanks for his work !<br>
 
 ![Screenshot](screenshot.png)
 
 ## Installing
 
 1. [Grab the latest release](https://github.com/Striffly/mailspring-avatars/releases)
-1. Extract Mailspring-Avatars and load Mailspring
-1. From the menu, select `Developer > Install a Package Manually...` from the dialog, choose the directory of this plugin to install it
+2. Extract Mailspring-Avatars and load Mailspring
+3. From the menu, select `Developer > Install a Package Manually...` from the dialog, choose the directory of this plugin to install it
 
 
 ## Contribute
