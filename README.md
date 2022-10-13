@@ -14,9 +14,7 @@ Fork of [emadow](https://github.com/emadow/mailspring-avatars) project, thanks f
 2. Extract Mailspring-Avatars and load Mailspring
 3. From the menu, select `Developer > Install a Package Manually...` from the dialog, choose the directory of this plugin to install it
 
-
 ## Contribute
 
-This plugin implements a Typescript builder as required since Maispring 1.6.3 (see https://github.com/Foundry376/Mailspring/issues/1645).
-
+Install `node_modules` with `yarn` command.<br>
 Once you have finish your edits in the `src` folder, compile with `yarn build`.
